@@ -1,4 +1,4 @@
-const STYLES = `
+const cuiPopoverStyles = `
 :host {
     display: block;
 }
@@ -13,13 +13,16 @@ class CuiPopover extends HTMLElement {
         this.shadow = this.attachShadow({ mode: "open" });
 
         this.styleEl = document.createElement("style");
-        this.styleEl.textContent = STYLES;
+        this.styleEl.textContent = cuiPopoverStyles;
 
         this.shadow.appendChild(this.styleEl);
         this.shadow.appendChild(document.createElement("slot"));
     }
 
     connectedCallback() {
+        if (!this.hasAttribute("popover")) {
+            this.setAttribute("popover", "");
+        }
     }
 
     disconnectedCallback() {
